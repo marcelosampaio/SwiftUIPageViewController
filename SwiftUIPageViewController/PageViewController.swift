@@ -11,12 +11,18 @@ import UIKit
 class PageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     // Variables
-    lazy var VCArr: [UIViewController] = {
-        return [self.VCInstance(name: "FirstVC"),self.VCInstance(name: "SecondVC"),self.VCInstance(name: "ThirdVC")]
+    lazy var arrayViewControllers: [UIViewController] = {
+        return [self.viewControllerInstance(name: "FirstVC"),self.viewControllerInstance(name: "SecondVC"),self.viewControllerInstance(name: "ThirdVC")]
         
     }()
     
-
+    // MARK: - View Controller Instance
+    private func viewControllerInstance(name: String) -> UIViewController {
+        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: name)
+    }
+    
+    
+    
     // MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +32,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
         self.dataSource = self
         self.delegate = self
         
-        if let firstVC = VCArr.first {
+        if let firstVC = arrayViewControllers.first {
             setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
             
         }
@@ -45,63 +51,57 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
             }
         }
     }
-    
-    
-    
-    // MARK: - View Controller Instance
-    private func VCInstance(name: String) -> UIViewController {
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: name)
-    }
+
     
     // MARK: - PageViewController DataSource and Delegate
     
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        guard let viewControllerIndex = VCArr.index(of: viewController) else {
+        guard let viewControllerIndex = arrayViewControllers.index(of: viewController) else {
             return nil
         }
         
         let previousIndex = viewControllerIndex - 1
         guard previousIndex >= 0 else {
-            return VCArr.last
+            return arrayViewControllers.last
 //            return nil // no carrousel
         }
         
-        guard VCArr.count > previousIndex else {
+        guard arrayViewControllers.count > previousIndex else {
             return nil
         }
         
         
-        return VCArr[previousIndex]
+        return arrayViewControllers[previousIndex]
         
     }
     
 
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        guard let viewControllerIndex = VCArr.index(of: viewController) else {
+        guard let viewControllerIndex = arrayViewControllers.index(of: viewController) else {
             return nil
         }
         
         let nextIndex = viewControllerIndex + 1
-        guard nextIndex < VCArr.count else {
-            return VCArr.first
+        guard nextIndex < arrayViewControllers.count else {
+            return arrayViewControllers.first
 //            return nil // no carrousel
         }
         
-        guard VCArr.count > nextIndex else {
+        guard arrayViewControllers.count > nextIndex else {
             return nil
         }
         
         
-        return VCArr[nextIndex]
+        return arrayViewControllers[nextIndex]
         
         
         
     }
     
     public func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return VCArr.count
+        return arrayViewControllers.count
     }
     
     
@@ -109,7 +109,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
         
         // check the current index of view controlle being presented
         guard let firstViewController = viewControllers?.first,
-            let firstViewControllerIndex = VCArr.index(of: firstViewController) else {
+            let firstViewControllerIndex = arrayViewControllers.index(of: firstViewController) else {
                 return 0
         }
         

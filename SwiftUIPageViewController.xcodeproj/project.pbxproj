@@ -55,11 +55,11 @@
 			isa = PBXGroup;
 			children = (
 				9CD120531E5F2B2E0042096B /* AppDelegate.swift */,
+				9CD120651E5F34710042096B /* PageViewController.swift */,
 				9CD120571E5F2B2E0042096B /* Main.storyboard */,
 				9CD1205A1E5F2B2E0042096B /* Assets.xcassets */,
 				9CD1205C1E5F2B2E0042096B /* LaunchScreen.storyboard */,
 				9CD1205F1E5F2B2E0042096B /* Info.plist */,
-				9CD120651E5F34710042096B /* PageViewController.swift */,
 			);
 			path = SwiftUIPageViewController;
 			sourceTree = "<group>";
