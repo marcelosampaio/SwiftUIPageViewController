@@ -64,6 +64,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
         let previousIndex = viewControllerIndex - 1
         guard previousIndex >= 0 else {
             return VCArr.last
+//            return nil // no carrousel
         }
         
         guard VCArr.count > previousIndex else {
@@ -85,6 +86,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
         let nextIndex = viewControllerIndex + 1
         guard nextIndex < VCArr.count else {
             return VCArr.first
+//            return nil // no carrousel
         }
         
         guard VCArr.count > nextIndex else {
