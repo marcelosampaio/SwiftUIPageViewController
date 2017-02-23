@@ -21,6 +21,8 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
+        
         self.dataSource = self
         self.delegate = self
         
@@ -113,6 +115,11 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
         
         
     }
-
+    
+    // MARK: - Status Bar
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .lightContent
+    }
     
 }
